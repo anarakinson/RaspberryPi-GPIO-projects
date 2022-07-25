@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 import RPi.GPIO as GPIO
 import pigpio
 import time
@@ -30,7 +29,6 @@ def main():
     print(angle)
     angle = ((angle / 90) * 1000) + 500
  
-    # more info at http://abyz.me.uk/rpi/pigpio/python.html#set_servo_pulsewidth
  
     pwm = pigpio.pi() 
     pwm.set_mode(servo, pigpio.OUTPUT)
@@ -43,7 +41,7 @@ def main():
 #        pwm.set_servo_pulsewidth( servo, i )
 #        time.sleep(0.01)
 
-#    print("return to 90 degree")
+ 
     pwm.set_servo_pulsewidth(servo, angle)
     time.sleep(1)
 
