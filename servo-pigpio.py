@@ -14,11 +14,13 @@ def parse_args():
     return args
 
 def main():
+    # if pigpiod not running
     # start pigpiod
     # subprocess.run(["sudo", "pigpiod"])
  
     args = parse_args()
 
+    # get pin and angle
     servo = int(args.pin)
     angle = int(args.angle)
 
@@ -27,21 +29,24 @@ def main():
     if angle  < 0:
         angle = 0
     print(angle)
+    # transform angle to frequency
     angle = ((angle / 90) * 1000) + 500
  
  
+    # setting up servo
     pwm = pigpio.pi() 
     pwm.set_mode(servo, pigpio.OUTPUT)
 
-    pwm.set_PWM_frequency( servo, 50 )
+    pwm.set_PWM_frequency(servo, 50)
 
 
 #    for i in range(500, 2501, 5):
 #        #print(f"freqency - {i}")
-#        pwm.set_servo_pulsewidth( servo, i )
+#        pwm.set_servo_pulsewidth(servo, i)
 #        time.sleep(0.01)
 
  
+    # rotating servo
     pwm.set_servo_pulsewidth(servo, angle)
     time.sleep(1)
 
